@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Vasilyuk"
         tools:targetApi="31">
         <activity
-            android:name=".Perexod"
+            android:name=".ContactAct"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

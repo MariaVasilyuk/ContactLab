@@ -6,7 +6,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-data class Contact(val id: Int, val title: String, val isDone: Boolean)
+data class Contact(
+    val id: Long,
+    val title: String,
+    val isDone: Boolean = false
+)
 
 class DBHelper(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -47,7 +51,7 @@ class DBHelper(context: Context?) :
             val isDoneIndex: Int = cursor.getColumnIndex(KEY_IS_DONE)
             do {
                 val todo = Contact(
-                    cursor.getInt(idIndex),
+                    cursor.getLong(idIndex),
                     cursor.getString(titleIndex),
                     cursor.getInt(isDoneIndex) == 1
                 )
@@ -58,16 +62,17 @@ class DBHelper(context: Context?) :
         return result
     }
 
-    fun add(title: String, isDone: Boolean = false) {
+    fun add(title: String, isDone: Boolean = false): Long {
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_TITLE, title)
         contentValues.put(KEY_IS_DONE, if (isDone) 1 else 0)
-        database.insert(TABLE_NAME, null, contentValues)
+        val id = database.insert(TABLE_NAME, null, contentValues)
         close()
+        return id
     }
 
-    fun update(id: Int, title: String, isDone: Boolean) {
+    fun update(id: Long, title: String, isDone: Boolean) {
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_TITLE, title)
@@ -76,7 +81,7 @@ class DBHelper(context: Context?) :
         close()
     }
 
-    fun remove(id: Int) {
+    fun remove(id: Long) {
         val database = this.writableDatabase
         database.delete(TABLE_NAME, "$KEY_ID = ?", arrayOf(id.toString()))
         close()

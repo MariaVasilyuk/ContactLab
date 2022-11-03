@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class RecyclerAdapter(
-    private val list: List<String>,
+    private val list: List<Contact>,
     // передаём коллбек нажатия на кнопку
-    private val onItemClick: (id: Int) -> Unit
+    private val newAct: (id: Int) -> Unit,
+    private val delContact: (id: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -20,10 +21,13 @@ class RecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = list[position].toString()
+        holder.textView.text = list[position].title
 
         holder.button1.setOnClickListener {
-            onItemClick(holder.adapterPosition)
+            newAct(holder.adapterPosition)
+        }
+        holder.buttonDel.setOnClickListener {
+            delContact(holder.adapterPosition)
         }
     }
 
@@ -33,7 +37,7 @@ class RecyclerAdapter(
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val textView = itemView.findViewById<TextView>(R.id.xxx)
-
+        val buttonDel = itemView.findViewById<Button>(R.id.buttonDel)
         val button1 = itemView.findViewById<Button>(R.id.button1)
     }
 }

@@ -8,14 +8,14 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
-
 class MainActivity : AppCompatActivity() {
     private val dbHelper = DBHelper(this)
+
     companion object {
         const val EXTRA_KEY = "EXTRA"
     }
-    private val list = mutableListOf<String>()
+
+    private val list = mutableListOf<Contact>()
     private lateinit var adapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,22 +24,33 @@ class MainActivity : AppCompatActivity() {
         title = "Телефонная книга"
 
 
-        list.addAll(dbHelper.getAll().map { it.title })
+        list.addAll(dbHelper.getAll())
 
-        val button = findViewById<Button>(R.id.button)
+        val buttonAdd = findViewById<Button>(R.id.button)
         val editText = findViewById<EditText>(R.id.editText)
 
-        adapter = RecyclerAdapter(list) {
-            val intent = Intent(this, Perexod::class.java)
-            intent.putExtra(EXTRA_KEY, list[it])
+        adapter = RecyclerAdapter(list, {
+            val intent = Intent(this, ContactAct::class.java)
+            intent.putExtra(EXTRA_KEY, list[it].title)
             startActivity(intent)
-        }
 
-        button.setOnClickListener {
+        }, {
+            dbHelper.remove(list[it].id)
+            list.removeAt(it)
+            adapter.notifyItemRemoved(it)
+
+        })
+
+        buttonAdd.setOnClickListener {
             if (editText.text.isNotEmpty()) {
                 val title = editText.text.toString()
-                dbHelper.add(title)
-                list.add(title)
+                val id = dbHelper.add(title)
+                list.add(
+                    Contact(
+                        id,
+                        title
+                    )
+                )
                 adapter.notifyItemInserted(list.lastIndex)
                 editText.setText("")
             }
