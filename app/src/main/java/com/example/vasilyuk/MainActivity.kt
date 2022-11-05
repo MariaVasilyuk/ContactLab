@@ -31,29 +31,19 @@ class MainActivity : AppCompatActivity() {
 
         adapter = RecyclerAdapter(list, {
             val intent = Intent(this, ContactAct::class.java)
-            intent.putExtra(EXTRA_KEY, list[it].title)
+            intent.putExtra(EXTRA_KEY, list[it].id)
             startActivity(intent)
 
         }, {
-            dbHelper.remove(list[it].id)
+            list[it].id?.let { it1 -> dbHelper.remove(it1) }
             list.removeAt(it)
             adapter.notifyItemRemoved(it)
 
         })
 
         buttonAdd.setOnClickListener {
-            if (editText.text.isNotEmpty()) {
-                val title = editText.text.toString()
-                val id = dbHelper.add(title)
-                list.add(
-                    Contact(
-                        id,
-                        title
-                    )
-                )
-                adapter.notifyItemInserted(list.lastIndex)
-                editText.setText("")
-            }
+            val intent = Intent(this, EditActivity::class.java)
+            startActivity(intent)
         }
         val recyclerView = findViewById<RecyclerView>(R.id.rec)
         recyclerView.layoutManager = LinearLayoutManager(this)
