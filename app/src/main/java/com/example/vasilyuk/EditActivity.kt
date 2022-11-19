@@ -9,7 +9,7 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
 
         /*
-                        val firstName = editText.text.toString()
+                val firstName = editText.text.toString()
                 val lastName = editText.text.toString()
                 val birthDate = editText.text.toString()
                 val phoneNumber = editText.text.toString()

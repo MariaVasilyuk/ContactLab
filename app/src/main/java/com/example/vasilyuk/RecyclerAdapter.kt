@@ -36,8 +36,8 @@ class RecyclerAdapter(
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val textView = itemView.findViewById<TextView>(R.id.xxx)
+        val textView = itemView.findViewById<TextView>(R.id.NameContact)
         val buttonDel = itemView.findViewById<Button>(R.id.buttonDel)
-        val button1 = itemView.findViewById<Button>(R.id.button1)
+        val button1 = itemView.findViewById<Button>(R.id.butSecond)
     }
 }

@@ -6,7 +6,7 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/xxx"
+        android:id="@+id/NameContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -14,7 +14,7 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/butSecond"
         android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
