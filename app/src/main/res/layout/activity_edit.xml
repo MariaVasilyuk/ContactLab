@@ -6,43 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".EditActivity">
 
+    <Button
+        android:id="@+id/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="161dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="1dp">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/TextName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/TextSurname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/TextBirth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="date|textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/TextNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="numberDecimal|phone" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="679dp" />
+
+    <Button
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="679dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

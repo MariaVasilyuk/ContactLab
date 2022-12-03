@@ -12,6 +12,7 @@ class DBHelper(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
+
         const val DATABASE_VERSION = 2
         const val DATABASE_NAME = "contactdb"
         const val TABLE_NAME = "contacts"
@@ -53,7 +54,7 @@ class DBHelper(context: Context?) :
             val phoneNumber: Int = cursor.getColumnIndex(KEY_NUMBER)
 
             do {
-                val todo = Contact(
+                val contact = Contact(
                     cursor.getLong(idIndex),
                     cursor.getString(firstNameIndex),
                     cursor.getString(lastNameIndex),
@@ -61,7 +62,7 @@ class DBHelper(context: Context?) :
                     cursor.getString(phoneNumber),
 
                 )
-                result.add(todo)
+                result.add(contact)
             } while (cursor.moveToNext())
         }
         cursor.close()
