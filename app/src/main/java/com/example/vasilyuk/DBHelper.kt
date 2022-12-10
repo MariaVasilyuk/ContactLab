@@ -69,6 +69,7 @@ class DBHelper(context: Context?) :
         return result
     }
 
+
     fun getById(id: Long): Contact? {
         var result: Contact? = null
         val database = this.writableDatabase
