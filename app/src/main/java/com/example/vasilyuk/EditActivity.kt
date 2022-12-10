@@ -5,19 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 
-class InfoAct : AppCompatActivity() {
+class EditActivity : AppCompatActivity() {
+
     private val dbHelper = DBHelper(this)
     private val list = mutableListOf<Contact>()
-    private lateinit var adapter: RecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
+        title = "Новый контакт"
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val firstNameEditText = findViewById<EditText>(R.id.TextName)
-        val lastNameEditText = findViewById<EditText>(R.id.TextSurname)
-        val birthDateEditText = findViewById<EditText>(R.id.TextBirth)
-        val phoneNumberEditText = findViewById<EditText>(R.id.TextNumber)
+        setContentView(R.layout.activity_edit)
+
+        val id = intent.getLongExtra(MainActivity.EXTRA_KEY, 0)
+        val contact = dbHelper.getById(id)
+        println(contact)
+        val firstNameEditText = findViewById<EditText>(R.id.Name)
+        val lastNameEditText = findViewById<EditText>(R.id.Surname)
+        val birthDateEditText = findViewById<EditText>(R.id.birthDate)
+        val phoneNumberEditText = findViewById<EditText>(R.id.TelNamber)
+
 
         val buttonESC = findViewById<Button>(R.id.buttonCancel)
         buttonESC.setOnClickListener {
@@ -40,8 +45,8 @@ class InfoAct : AppCompatActivity() {
             )
             val id = dbHelper.add(contact)
             list.add(Contact(id, firstName, lastName, birthDate, phoneNumber))
-            adapter.notifyItemInserted(list.lastIndex)
-            val intent = Intent(this, ContactActivity::class.java)
+            //dbHelper.update(id,contact)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

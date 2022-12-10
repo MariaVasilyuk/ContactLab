@@ -69,6 +69,33 @@ class DBHelper(context: Context?) :
         return result
     }
 
+    fun getById(id: Long): Contact? {
+        var result: Contact? = null
+        val database = this.writableDatabase
+        val cursor: Cursor = database.query(
+            TABLE_NAME, null, "$KEY_ID = ?", arrayOf(id.toString()),
+            null, null, null
+        )
+        if (cursor.moveToFirst()) {
+            val idIndex: Int = cursor.getColumnIndex(KEY_ID)
+            val firstNameIndex: Int = cursor.getColumnIndex(KEY_FIRST)
+            val lastNameIndex: Int = cursor.getColumnIndex(KEY_LAST)
+            val birthDateIndex: Int = cursor.getColumnIndex(KEY_DATE)
+            val phoneNumber: Int = cursor.getColumnIndex(KEY_NUMBER)
+
+            result = Contact(
+                cursor.getLong(idIndex),
+                cursor.getString(firstNameIndex),
+                cursor.getString(lastNameIndex),
+                cursor.getString(birthDateIndex),
+                cursor.getString(phoneNumber),
+
+                )
+        }
+        cursor.close()
+        return result
+    }
+
     fun add(contact: Contact): Long {
         val database = this.writableDatabase
         val contentValues = ContentValues()

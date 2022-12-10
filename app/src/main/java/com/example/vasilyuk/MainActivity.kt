@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.editText)
 
         adapter = RecyclerAdapter(list, {
-            val intent = Intent(this, ContactActivity::class.java)
+            val intent = Intent(this, InfoActivity::class.java)
             intent.putExtra(EXTRA_KEY, list[it].id)
             startActivity(intent)
 
@@ -41,8 +41,9 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
         buttonAdd.setOnClickListener {
-            val intent = Intent(this, ContactActivity::class.java)
+            val intent = Intent(this, EditActivity::class.java)
             startActivity(intent)
         }
         val recyclerView = findViewById<RecyclerView>(R.id.rec)
