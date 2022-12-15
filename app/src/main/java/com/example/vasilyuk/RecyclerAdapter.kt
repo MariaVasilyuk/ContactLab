@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class RecyclerAdapter(
-    private val list: List<Contact>,
     // передаём коллбек нажатия на кнопку
     private val newAct: (id: Int) -> Unit,
     private val delContact: (id: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+
+    private val list = mutableListOf<Contact>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item, parent, false)
@@ -27,6 +29,7 @@ class RecyclerAdapter(
             newAct(holder.adapterPosition)
         }
         holder.buttonDel.setOnClickListener {
+            println("buttonDel")
             delContact(holder.adapterPosition)
         }
     }
@@ -35,7 +38,13 @@ class RecyclerAdapter(
         return list.size
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    fun saveClist(newlist: List<Contact>) {
+        list.clear()
+        list.addAll(newlist)
+        notifyDataSetChanged()
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView = itemView.findViewById<TextView>(R.id.NameContact)
         val buttonDel = itemView.findViewById<Button>(R.id.buttonDel)
         val button1 = itemView.findViewById<Button>(R.id.butSecond)

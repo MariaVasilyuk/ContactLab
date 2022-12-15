@@ -36,13 +36,15 @@ class InfoActivity : AppCompatActivity() {
         val buttonRED = findViewById<Button>(R.id.red)
         buttonRED.setOnClickListener {
 
-            val intent = Intent(this, InfoActivity::class.java)
+            val intent = Intent(this, EditActivity::class.java)
             startActivity(intent)
         }
         val buttonDelete = findViewById<Button>(R.id.del)
         buttonDelete.setOnClickListener {
-
-            dbHelper.remove(id)
+            val id = intent.getLongExtra(MainActivity.EXTRA_KEY, 0)
+            if (contact != null) {
+                dbHelper.update(id, contact)
+            }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

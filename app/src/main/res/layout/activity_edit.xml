@@ -40,32 +40,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Surname: " />
+            android:hint="Surname: "
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name: " />
+            android:hint="Name:"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/birthDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="birthDate: " />
+            android:hint="birthDate: "
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/TelNamber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="TelNamber: " />
+            android:hint="TelNamber: "
+            android:inputType="textPersonName" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

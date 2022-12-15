@@ -9,7 +9,6 @@ import android.widget.EditText
 class EditActivity : AppCompatActivity() {
 
     private val dbHelper = DBHelper(this)
-    private val list = mutableListOf<Contact>()
     override fun onCreate(savedInstanceState: Bundle?) {
         title = "Новый контакт"
         super.onCreate(savedInstanceState)
@@ -43,9 +42,11 @@ class EditActivity : AppCompatActivity() {
                 birthDate,
                 phoneNumber
             )
-            val id = dbHelper.add(contact)
-            list.add(Contact(id, firstName, lastName, birthDate, phoneNumber))
-            //dbHelper.update(id,contact)
+            if (id == 0L) {
+                dbHelper.add(contact)
+            } else {
+                dbHelper.update(id, contact)
+            }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
